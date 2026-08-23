@@ -336,9 +336,11 @@ const AppearanceSettings: FC = () => {
       <SettingGroup theme={theme}>
         <SettingTitle>{t('settings.theme.title')}</SettingTitle>
         <SettingDivider />
-        <ThemePreviewSelector value={settedTheme} options={themeOptions} onChange={setTheme} />
+        <div id="setting-appearance-theme-mode" className="scroll-mt-6">
+          <ThemePreviewSelector value={settedTheme} options={themeOptions} onChange={setTheme} />
+        </div>
         <SettingDivider />
-        <SettingRow>
+        <SettingRow id="setting-appearance-theme-color-primary" className="scroll-mt-6">
           <SettingRowTitle>{t('settings.theme.color_primary')}</SettingRowTitle>
           <WideControlRow>
             <ThemeColorPicker
@@ -355,7 +357,7 @@ const AppearanceSettings: FC = () => {
       <SettingGroup theme={theme}>
         <SettingTitle>{t('settings.general.common.sections.display_language')}</SettingTitle>
         <SettingDivider />
-        <SettingRow>
+        <SettingRow id="setting-appearance-display-language" className="scroll-mt-6">
           <SettingRowTitle>{t('common.language')}</SettingRowTitle>
           <SelectorRow>
             <Select value={displayLanguage} onValueChange={onSelectLanguage}>
@@ -390,7 +392,7 @@ const AppearanceSettings: FC = () => {
           </>
         )}
         <SettingDivider />
-        <SettingRow>
+        <SettingRow id="setting-appearance-zoom" className="scroll-mt-6">
           <SettingRowTitle>{t('settings.zoom.title')}</SettingRowTitle>
           <ZoomButtonGroup>
             {!isDefaultZoom && (
@@ -435,7 +437,7 @@ const AppearanceSettings: FC = () => {
           </>
         )}
         <SettingDivider />
-        <SettingRow>
+        <SettingRow id="setting-appearance-menu-presentation-mode" className="scroll-mt-6">
           <SettingRowTitle>{t('settings.general.common.menu.presentation_mode.title')}</SettingRowTitle>
           <SegmentedControl<MenuPresentationMode>
             value={menuPresentationMode}
@@ -445,7 +447,7 @@ const AppearanceSettings: FC = () => {
           />
         </SettingRow>
         <SettingDivider />
-        <SettingRow>
+        <SettingRow id="setting-appearance-chat-list-position" className="scroll-mt-6">
           <SettingRowTitle>{t('settings.display.list_position.chat')}</SettingRowTitle>
           <SegmentedControl<TopicTabPosition>
             value={topicListPosition}
@@ -456,7 +458,7 @@ const AppearanceSettings: FC = () => {
           />
         </SettingRow>
         <SettingDivider />
-        <SettingRow>
+        <SettingRow id="setting-appearance-work-list-position" className="scroll-mt-6">
           <SettingRowTitle>{t('settings.display.list_position.work')}</SettingRowTitle>
           <SegmentedControl<TopicTabPosition>
             value={sessionListPosition}
@@ -471,7 +473,7 @@ const AppearanceSettings: FC = () => {
       <SettingGroup theme={theme}>
         <SettingTitle>{t('settings.display.font.title')}</SettingTitle>
         <SettingDivider />
-        <SettingRow>
+        <SettingRow id="setting-appearance-font-global" className="scroll-mt-6">
           <SettingRowTitle>{t('settings.display.font.global')}</SettingRowTitle>
           <SelectorRow className="gap-2">
             {userTheme.userFontFamily && (
@@ -496,7 +498,7 @@ const AppearanceSettings: FC = () => {
           </SelectorRow>
         </SettingRow>
         <SettingDivider />
-        <SettingRow>
+        <SettingRow id="setting-appearance-font-code" className="scroll-mt-6">
           <SettingRowTitle>{t('settings.display.font.code')}</SettingRowTitle>
           <SelectorRow className="gap-2">
             {userTheme.userCodeFontFamily && (
@@ -527,7 +529,7 @@ const AppearanceSettings: FC = () => {
       <SettingGroup theme={theme}>
         <SettingTitle>{t('chat.settings.code_execution.title')}</SettingTitle>
         <SettingDivider />
-        <SettingRow>
+        <SettingRow id="setting-appearance-code-execution-enabled" className="scroll-mt-6">
           <Flex className="items-center gap-1">
             <SettingRowTitle>{t('chat.settings.code_execution.title')}</SettingRowTitle>
             <InfoTooltip content={t('chat.settings.code_execution.tip')} />
@@ -558,7 +560,7 @@ const AppearanceSettings: FC = () => {
           </>
         )}
         <SettingDivider />
-        <SettingRow>
+        <SettingRow id="setting-appearance-code-image-tools" className="scroll-mt-6">
           <Flex className="items-center gap-1">
             <SettingRowTitle>{t('chat.settings.code_image_tools.label')}</SettingRowTitle>
             <InfoTooltip content={t('chat.settings.code_image_tools.tip')} />
@@ -572,7 +574,9 @@ const AppearanceSettings: FC = () => {
         {hasV1CustomCssMarker(customCss) && (
           <SettingDescription>{t('settings.display.custom.css.migration_notice')}</SettingDescription>
         )}
-        <div className="mt-4 overflow-hidden rounded-lg border border-border-subtle">
+        <div
+          id="setting-appearance-custom-css"
+          className="mt-4 scroll-mt-6 overflow-hidden rounded-lg border border-border-subtle">
           <CodeEditor
             theme={activeCmTheme}
             fontSize={fontSize - 1}
