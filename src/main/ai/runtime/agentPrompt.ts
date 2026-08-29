@@ -78,15 +78,19 @@ export async function buildAgentRuntimePrompt({
     agentDataPath
   )
 
+  // Prefix-cache layout: Cherry-owned policy that is identical across sessions comes first. After
+  // that boundary, place configurable/runtime-derived sections in decreasing expected stability.
+  // The explicit precedence policy remains authoritative: physical placement is a cache concern,
+  // not a change to the instruction hierarchy declared above.
   const append = [
     hasAgentInstructions ? AGENT_INSTRUCTION_PRECEDENCE_PROMPT : undefined,
-    getLanguageInstruction(agent),
-    parts.context,
-    workspaceInstructions,
+    REPORT_ARTIFACTS_PROMPT,
     hasAgentInstructions ? buildAgentInstructionsSection(resolvedInstructions) : undefined,
+    workspaceInstructions,
+    parts.context,
     parts.base.kind === 'custom' ? customBaseContext : undefined,
     citationsGuidance,
-    REPORT_ARTIFACTS_PROMPT
+    getLanguageInstruction(agent)
   ]
     .filter(Boolean)
     .join('\n\n')
