@@ -21,7 +21,8 @@ vi.mock('@application', () => ({
   application: {
     get: (name: string) => {
       if (name === 'PreferenceService') return { get: mocks.preferenceGet }
-      if (name === 'AgentSessionRuntimeService') return { getTurnTrustedNotifyChannels: mocks.getTurnTrustedNotifyChannels }
+      if (name === 'AgentSessionRuntimeService')
+        return { getTurnTrustedNotifyChannels: mocks.getTurnTrustedNotifyChannels }
       return { listTools: mocks.listTools }
     }
   }
